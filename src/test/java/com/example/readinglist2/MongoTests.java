@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -44,7 +45,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebIntegrationTest(randomPort=true)
 public class MongoTests {
     //配置浏览器驱动
-    private static InternetExplorerDriver browser;
+    private static ChromeDriver browser;
     @Value("${local.server.port}")
     private int port;
 
@@ -56,7 +57,7 @@ public class MongoTests {
     private MockMvc mockMvc;
     @BeforeClass
     public static void openBrowser() {
-        browser = new InternetExplorerDriver();
+        browser = new ChromeDriver();
         browser.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
     @AfterClass
