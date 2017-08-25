@@ -25,4 +25,9 @@ public class MongoTests {
         }
 
     }
+
+    @Test
+    public void updateBook() {
+
+    }
 }
