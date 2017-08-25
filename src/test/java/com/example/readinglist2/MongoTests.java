@@ -28,6 +28,8 @@ public class MongoTests {
 
     @Test
     public void updateBook() {
-
+        Book updateBook = bookRepository.findOne("599fbe6c2531bd01946bded8");
+        updateBook.setIsbn("1238888");
+        bookRepository.save(updateBook);
     }
 }
