@@ -71,12 +71,12 @@ public class MongoTests {
     }
     @Test
     public void MongoConnectionTest() {
-       /* Book book = new Book();
+         Book book = new Book();
         book.setIsbn("123466");
         book.setDescription("这是一本好书");
         book.setAuthor("佚名");
         book.setTitle("读者");
-        bookRepository.save(book);*/
+//        bookRepository.save(book);
         for(Book b : bookRepository.findAll()) {
             System.out.println(b.toString());
         }
