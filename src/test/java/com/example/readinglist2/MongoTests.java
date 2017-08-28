@@ -57,7 +57,14 @@ public class MongoTests {
     private MockMvc mockMvc;
     @BeforeClass
     public static void openBrowser() {
+        // 设置 chrome 的路径
+        System.setProperty(
+                "webdriver.chrome.driver",
+                "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe");
+        // 创建一个 ChromeDriver 的接口，用于连接 Chrome
+        // 创建一个 Chrome 的浏览器实例
         browser = new ChromeDriver();
+//        browser = new ChromeDriver();
         browser.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
     @AfterClass
