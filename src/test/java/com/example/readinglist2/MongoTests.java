@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebIntegrationTest(randomPort=true)
 public class MongoTests {
     //配置浏览器驱动
-    private static ChromeDriver browser;
+    private static InternetExplorerDriver browser;
     @Value("${local.server.port}")
     private int port;
 
@@ -58,14 +59,12 @@ public class MongoTests {
     @BeforeClass
     public static void openBrowser() {
         // 设置 chrome 的路径
-        System.setProperty(
-                "webdriver.chrome.driver",
-                "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe");
+        System.setProperty("webdriver.ie.driver", "C:\\software\\IEDriverServer_x64_3.4.0\\IEDriverServer.exe");
         // 创建一个 ChromeDriver 的接口，用于连接 Chrome
         // 创建一个 Chrome 的浏览器实例
-        browser = new ChromeDriver();
+        browser = new InternetExplorerDriver();
 //        browser = new ChromeDriver();
-        browser.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        browser.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
     }
     @AfterClass
     public static void closeBrowser() {
@@ -83,7 +82,7 @@ public class MongoTests {
         book.setDescription("这是一本好书");
         book.setAuthor("佚名");
         book.setTitle("读者");
-//        bookRepository.save(book);
+        bookRepository.save(book);
         for(Book b : bookRepository.findAll()) {
             System.out.println(b.toString());
         }
@@ -150,7 +149,7 @@ public class MongoTests {
 
     @Test
     public void addBookToEmptyList() {
-        String baseUrl = "http://localhost:"+port;
+        String baseUrl = "http://localhost:"+port+"/Reader";
         browser.get(baseUrl);
         assertEquals("You have no books in your book list", browser.findElementByTagName("div").getText());
         browser.findElementByName("title").sendKeys("BOOK TITLE");
@@ -165,6 +164,5 @@ public class MongoTests {
         WebElement dt = browser.findElementByCssSelector("dd.bookDescription");
         assertEquals("DESCRIPTION", dt.getText());
     }
-
 
 }
